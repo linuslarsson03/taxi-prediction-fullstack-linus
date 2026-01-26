@@ -1,15 +1,13 @@
 from pathlib import Path
 
-DATA_PATH = Path(__file__).parent.parent / "data"
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-CLEANED_DATA_PATH = Path(__file__).parent.parent / "data" / "cleaned_data.csv"
+DATA_PATH = BASE_DIR / "data"
+CLEANED_DATA_PATH = BASE_DIR / "data" / "cleaned_data.csv"
 
-JOBLIB_PATH = Path(__file__).parent.parent / "models"
-
+JOBLIB_PATH = BASE_DIR / "models"
 MODEL_PATH = JOBLIB_PATH / "taxi_price_model.joblib"
 SCALER_PATH = JOBLIB_PATH / "taxi_price_scaler.joblib"
-
-SCALER_PATH = Path
 
 FEATURE_COLUMNS = [
     "Trip_Distance_km",
