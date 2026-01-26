@@ -3,14 +3,14 @@ import pandas as pd
 import joblib
 from pydantic import BaseModel
 
-from taxipred.utils.constants import DATA_PATH, MODEL_PATH, SCALER_PATH
+from taxipred.utils.constants import CLEANED_DATA_PATH, MODEL_PATH, SCALER_PATH
 from taxipred.backend.data_processing import TaxiPredict, encode_trip_features
 
 app = FastAPI()
 
 router = APIRouter(prefix="/api/taxi")
 
-df = pd.read_csv(DATA_PATH / "taxi_trip_pricing.csv")
+df = pd.read_csv(CLEANED_DATA_PATH)
 
 model = joblib.load(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
@@ -22,7 +22,8 @@ class PredictTaxiPrice(BaseModel):
 
 @router.get("")
 def read_data():
-     return df.to_dict(orient="records")
+    return df.to_dict(orient="records")
+
 
 
 @router.post("/predict", response_model=PredictTaxiPrice)
